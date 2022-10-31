@@ -1,0 +1,38 @@
+name: aws-codeartifact-maven-login
+description: Login and render settings.xml
+branding:
+  icon: code
+  color: blue
+author: Mike Dodge, Fred78290
+
+inputs:
+  repo-name:
+    description: "Repo name"
+    required: true
+  repo-domain:
+    description: "Repo domain"
+    required: true
+  account-number:
+    description: "AWS acct number"
+    required: true
+  settings-xml-path:
+    description: "folder for m2 settings"
+    required: false
+    default: "/home/runner/.m2/settings.xml"
+  region:
+    description: "aws region"
+    required: false
+    default: "us-east-1"
+  duration:
+    default: '900'
+    description: 'Duration in seconds'
+    required: false
+  mirror:
+    default: 'false'
+    description: 'Use codeartifact as mirror'
+    required: false
+runs:
+  using: 'node16'
+  main: 'dist/action/index.js'
+  post: 'dist/cleanup/index.js'
+      
